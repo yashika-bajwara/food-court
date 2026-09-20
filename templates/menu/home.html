@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Food Court{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Delicious Food.<br>Happy Moments.</h1>
+        <p>Enjoy fresh, tasty and affordable food at Food Court.</p>
+
+        <a href="{% url 'menu' %}" class="btn">
+            Explore Menu
+        </a>
+    </div>
+</section>
+
+
+<section class="section">
+    <h2>Our Categories</h2>
+
+    <div class="category-grid">
+
+        {% for category in categories %}
+        <div class="category-card">
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.description }}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<section class="section">
+    <h2>Featured Food</h2>
+
+    <div class="food-grid">
+
+        {% for food in featured_foods %}
+
+        <div class="food-card">
+
+            <div class="food-image">
+                <img src="{% static 'images/' %}{{ food.image }}"
+                     alt="{{ food.name }}">
+            </div>
+
+            <div class="food-info">
+                <span class="food-category">
+                    {{ food.category.name }}
+                </span>
+
+                <h3>{{ food.name }}</h3>
+
+                <p>{{ food.description }}</p>
+
+                <div class="food-bottom">
+                    <strong>₹{{ food.price }}</strong>
+
+                    <a href="{% url 'order' %}?food={{ food.id }}"
+                       class="btn">
+                        Order
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<section class="offer">
+    <h2>Hungry? We've Got You Covered! 🍕</h2>
+    <p>Fresh food, great prices and quick service.</p>
+
+    <a href="{% url 'menu' %}" class="btn">
+        View Full Menu
+    </a>
+</section>
+
+{% endblock %}

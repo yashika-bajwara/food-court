@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}About & Contact | Food Court{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>About Food Court</h1>
+    <p>Good food, great taste, and memorable moments.</p>
+</section>
+
+<section class="about-section">
+
+    <div class="about-box">
+        <h2>🍴 Welcome to Food Court</h2>
+        <p>
+            Food Court is a modern food destination where you can
+            enjoy delicious Indian, Chinese, fast food, drinks and
+            desserts in one place.
+        </p>
+
+        <div class="facilities">
+            <div>🍔 Fresh Food</div>
+            <div>🪑 Comfortable Seating</div>
+            <div>⚡ Quick Service</div>
+            <div>💰 Affordable Prices</div>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="contact-section">
+
+    <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p>📍 Food Court, Punjab, India</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ foodcourt@example.com</p>
+        <p>🕐 Open Daily: 10:00 AM – 10:00 PM</p>
+    </div>
+
+
+    <form method="POST" class="contact-form">
+
+        {% csrf_token %}
+
+        {% if success %}
+            <div class="success-message">
+                Your message has been sent successfully!
+            </div>
+        {% endif %}
+
+        <label>Your Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Subject</label>
+        <input type="text" name="subject" required>
+
+        <label>Message</label>
+        <textarea name="message" required></textarea>
+
+        <button type="submit" class="btn">
+            Send Message
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

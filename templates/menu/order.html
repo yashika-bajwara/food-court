@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Place Order | Food Court{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Place Your Order</h1>
+    <p>Fill in your details and select your food.</p>
+</section>
+
+<section class="order-section">
+
+    <form method="POST" class="order-form">
+
+        {% csrf_token %}
+
+        <label>Your Name</label>
+        <input type="text" name="customer_name" required>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Select Food</label>
+        <select name="food_id" required>
+            <option value="">-- Select Food --</option>
+
+            {% for food in foods %}
+                <option value="{{ food.id }}"
+    {% if selected_food == food.id|stringformat:"s" %}selected{% endif %}>
+    {{ food.name }} - ₹{{ food.price }}
+</option>
+            {% endfor %}
+
+        </select>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" min="1" value="1" required>
+
+        <label>Table Number</label>
+        <input type="text" name="table_number"
+               placeholder="Optional">
+
+        <label>Address</label>
+        <textarea name="address"
+                  placeholder="Optional"></textarea>
+
+        <button type="submit" class="btn">
+            Place Order
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}
